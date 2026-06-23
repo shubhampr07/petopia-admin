@@ -54,11 +54,17 @@ export default async function InquiryDetailPage({ params }: { params: Promise<{ 
       <div className="flex items-center gap-3 mb-6 flex-wrap">
         <span className="text-sm font-medium">Status:</span>
         <Badge variant={STATUS_VARIANT[inquiry.status] ?? "outline"} className="capitalize">{inquiry.status}</Badge>
-        {STATUSES.filter((s) => s !== inquiry.status).map((s) => (
-          <form key={s} action={updateInquiryStatus.bind(null, id, s)}>
-            <Button type="submit" variant="outline" size="sm" className="capitalize">{s}</Button>
-          </form>
-        ))}
+        {STATUSES.filter((s) => s !== inquiry.status).map((s) => {
+          async function setStatus() {
+            "use server";
+            await updateInquiryStatus(id, s);
+          }
+          return (
+            <form key={s} action={setStatus}>
+              <Button type="submit" variant="outline" size="sm" className="capitalize">{s}</Button>
+            </form>
+          );
+        })}
       </div>
 
       <div className="grid gap-6 md:grid-cols-2">
