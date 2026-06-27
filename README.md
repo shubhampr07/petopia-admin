@@ -56,7 +56,21 @@ petopia-server  /api/admin/*   (Express, port 4000)
 2. **Admin panel**
 
    ```bash
-   cp .env.example .env       # set ADMIN_API_URL if the server isn't on :4000
+## Deployment env vars
+
+| Platform | Variable | Value |
+|----------|----------|-------|
+| **Vercel / Render (this app)** | `ADMIN_API_URL` | `https://petopia-server-d7og.onrender.com` (your API URL, no trailing slash) |
+
+## Test credentials (stored in database — run `npm run seed` on petopia-server)
+
+| Portal | Email | Password |
+|--------|-------|----------|
+| **Admin** | `admin@petopia.com` | `Petopia@Admin1` |
+| **Grooming manager** | `grooming@petopia.ae` | `Petopia@Manager1` |
+| **Grooming groomer** | `g01@petopia.ae` | `Petopia@G01` |
+
+Admin credentials live in the **`AdminStaff`** table on petopia-server (not env vars).
    npm install
    npm run dev                # admin on http://localhost:3001
    ```
