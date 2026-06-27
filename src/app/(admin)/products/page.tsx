@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { Pencil } from "lucide-react";
+import { Pencil, Download, Upload } from "lucide-react";
 import { api } from "@/lib/api";
 import { money } from "@/lib/format";
 import { PageHeader } from "@/components/PageHeader";
@@ -27,7 +27,23 @@ export default async function ProductsPage({
       <PageHeader
         title="Products"
         subtitle={`${products.length} product${products.length === 1 ? "" : "s"} in the catalog`}
-        action={{ href: "/products/new", label: "+ Add Product" }}
+        action={
+          <div className="flex items-center gap-2">
+            <Button asChild variant="outline" size="sm">
+              <a href="/api/export/products" download>
+                <Download size={14} className="mr-1.5" /> Export CSV
+              </a>
+            </Button>
+            <Button asChild variant="outline" size="sm">
+              <Link href="/products/import">
+                <Upload size={14} className="mr-1.5" /> Import CSV
+              </Link>
+            </Button>
+            <Button asChild size="sm">
+              <Link href="/products/new">+ Add product</Link>
+            </Button>
+          </div>
+        }
       />
 
       <form className="mb-4 max-w-sm" action="/products" method="get">

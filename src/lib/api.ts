@@ -249,6 +249,11 @@ export const api = {
   updateProduct: (id: number, body: Record<string, unknown>) =>
     apiFetch<{ product: Product }>(`/api/admin/products/${id}`, { method: "PATCH", body }),
   deleteProduct: (id: number) => apiFetch<{ ok: true }>(`/api/admin/products/${id}`, { method: "DELETE" }),
+  importProducts: (rows: Record<string, unknown>[]) =>
+    apiFetch<{ created: number; updated: number; errors: { row: number; message: string }[] }>(
+      "/api/admin/products/import",
+      { method: "POST", body: { rows } }
+    ),
 
   // Brands
   listBrands: () => apiFetch<{ brands: Brand[] }>("/api/admin/brands"),
@@ -276,8 +281,15 @@ export const api = {
   deleteUser: (id: string) => apiFetch<{ ok: true }>(`/api/admin/users/${id}`, { method: "DELETE" }),
 
   // Orders
-  listOrders: (status?: string) =>
-    apiFetch<{ orders: OrderListItem[] }>(`/api/admin/orders${status ? `?status=${encodeURIComponent(status)}` : ""}`),
+  listOrders: (params?: { status?: string; search?: string; dateFrom?: string; dateTo?: string }) => {
+    const qs = new URLSearchParams();
+    if (params?.status)   qs.set("status",   params.status);
+    if (params?.search)   qs.set("search",   params.search);
+    if (params?.dateFrom) qs.set("dateFrom", params.dateFrom);
+    if (params?.dateTo)   qs.set("dateTo",   params.dateTo);
+    const q = qs.toString();
+    return apiFetch<{ orders: OrderListItem[] }>(`/api/admin/orders${q ? `?${q}` : ""}`);
+  },
   getOrder: (id: string) => apiFetch<{ order: OrderDetail }>(`/api/admin/orders/${id}`),
   updateOrderStatus: (id: string, status: string) =>
     apiFetch<{ order: { id: string; status: string } }>(`/api/admin/orders/${id}`, {
