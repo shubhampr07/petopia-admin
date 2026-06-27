@@ -53,10 +53,10 @@ export default async function DashboardPage() {
     <>
       <PageHeader title="Dashboard" subtitle="Overview of your store at a glance" />
 
-      <div className="grid gap-4 mb-6 [grid-template-columns:repeat(auto-fit,minmax(200px,1fr))]">
+      <div className="grid gap-4 mb-6 [grid-template-columns:repeat(auto-fit,minmax(min(100%,200px),1fr))]">
         <StatCard label="Products" value={counts.products} Icon={Package} href="/products" />
         <StatCard label="Brands" value={counts.brands} Icon={Tag} href="/brands" />
-        <StatCard label="Customers" value={counts.users} Icon={Users} href="/users" />
+        <StatCard label="Storefront Users" value={counts.users} Icon={Users} href="/users" />
         <StatCard label="Orders" value={counts.orders} Icon={ShoppingBag} href="/orders" />
         <StatCard label="Service Bookings" value={counts.bookings} Icon={CalendarCheck} href="/bookings" />
         <StatCard label="Adopt Pets" value={counts.adoptPets} Icon={PawPrint} href="/adopt" />
@@ -74,7 +74,7 @@ export default async function DashboardPage() {
         </CardContent>
       </Card>
 
-      <div className="grid gap-6 [grid-template-columns:repeat(auto-fit,minmax(360px,1fr))]">
+      <div className="grid gap-6 [grid-template-columns:repeat(auto-fit,minmax(min(100%,280px),1fr))]">
         <Card>
           <CardHeader className="flex-row items-center justify-between border-b py-4">
             <CardTitle>Recent Orders</CardTitle>

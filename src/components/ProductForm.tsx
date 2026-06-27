@@ -62,7 +62,7 @@ export function ProductForm({
 
   return (
     <Card className="max-w-3xl">
-      <CardContent className="p-6">
+      <CardContent className="p-4 sm:p-6">
         <form action={formAction} className="space-y-5">
           <div className="grid gap-5 sm:grid-cols-2">
             <div className="space-y-2 sm:col-span-2">

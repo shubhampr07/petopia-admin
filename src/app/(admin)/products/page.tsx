@@ -28,25 +28,25 @@ export default async function ProductsPage({
         title="Products"
         subtitle={`${products.length} product${products.length === 1 ? "" : "s"} in the catalog`}
         action={
-          <div className="flex items-center gap-2">
-            <Button asChild variant="outline" size="sm">
+          <div className="flex flex-wrap items-center gap-2 w-full sm:w-auto">
+            <Button asChild variant="outline" size="sm" className="flex-1 sm:flex-none">
               <a href="/api/export/products" download>
                 <Download size={14} className="mr-1.5" /> Export CSV
               </a>
             </Button>
-            <Button asChild variant="outline" size="sm">
+            <Button asChild variant="outline" size="sm" className="flex-1 sm:flex-none">
               <Link href="/products/import">
                 <Upload size={14} className="mr-1.5" /> Import CSV
               </Link>
             </Button>
-            <Button asChild size="sm">
+            <Button asChild size="sm" className="flex-1 sm:flex-none">
               <Link href="/products/new">+ Add product</Link>
             </Button>
           </div>
         }
       />
 
-      <form className="mb-4 max-w-sm" action="/products" method="get">
+      <form className="mb-4 w-full max-w-sm" action="/products" method="get">
         <Input name="q" defaultValue={search} placeholder="Search by name, brand, or category…" />
       </form>
 

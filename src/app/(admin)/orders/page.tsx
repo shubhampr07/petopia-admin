@@ -105,9 +105,9 @@ export default async function OrdersPage({
       {/* Filters */}
       <Card className="mb-4">
         <CardContent className="p-4">
-          <form method="get" action="/orders" className="flex flex-wrap gap-3 items-end">
+          <form method="get" action="/orders" className="grid grid-cols-1 sm:flex sm:flex-wrap gap-3 sm:items-end">
             {activeStatus !== "All" && <input type="hidden" name="status" value={activeStatus} />}
-            <div className="flex-1 min-w-[200px] relative">
+            <div className="w-full sm:flex-1 sm:min-w-[200px] relative">
               <Search size={14} className="absolute left-3 top-1/2 -translate-y-1/2 text-muted-foreground" />
               <Input
                 name="q"
@@ -116,18 +116,20 @@ export default async function OrdersPage({
                 className="pl-8"
               />
             </div>
-            <div className="flex items-center gap-2">
-              <label className="text-xs font-medium text-muted-foreground whitespace-nowrap">From</label>
-              <Input type="date" name="dateFrom" defaultValue={dateFrom ?? ""} className="w-36" />
+            <div className="flex items-center gap-2 w-full sm:w-auto">
+              <label className="text-xs font-medium text-muted-foreground whitespace-nowrap shrink-0">From</label>
+              <Input type="date" name="dateFrom" defaultValue={dateFrom ?? ""} className="w-full sm:w-36" />
             </div>
-            <div className="flex items-center gap-2">
-              <label className="text-xs font-medium text-muted-foreground whitespace-nowrap">To</label>
-              <Input type="date" name="dateTo" defaultValue={dateTo ?? ""} className="w-36" />
+            <div className="flex items-center gap-2 w-full sm:w-auto">
+              <label className="text-xs font-medium text-muted-foreground whitespace-nowrap shrink-0">To</label>
+              <Input type="date" name="dateTo" defaultValue={dateTo ?? ""} className="w-full sm:w-36" />
             </div>
-            <Button type="submit" size="sm">Apply</Button>
-            {isFiltered && (
-              <Button asChild variant="ghost" size="sm"><Link href="/orders">Clear</Link></Button>
-            )}
+            <div className="flex gap-2 w-full sm:w-auto">
+              <Button type="submit" size="sm" className="flex-1 sm:flex-none">Apply</Button>
+              {isFiltered && (
+                <Button asChild variant="ghost" size="sm" className="flex-1 sm:flex-none"><Link href="/orders">Clear</Link></Button>
+              )}
+            </div>
           </form>
         </CardContent>
       </Card>

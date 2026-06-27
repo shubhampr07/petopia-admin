@@ -34,7 +34,7 @@ export default async function UserDetailPage({
           <h1 className="text-2xl font-bold tracking-tight">{user.name}</h1>
           <p className="text-sm mt-1 text-muted-foreground">
             {user.email}
-            {user.phone ? ` · ${user.phone}` : ""} · Joined {formatDate(user.createdAt)}
+            {user.phone ? ` · ${user.phone}` : ""} · Registered {formatDate(user.createdAt)} via petopia.ae
           </p>
         </div>
         <DeleteButton

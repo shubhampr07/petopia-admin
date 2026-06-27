@@ -12,9 +12,9 @@
   --popover: oklch(1 0 0);
   --popover-foreground: oklch(0.21 0.03 256);
 
-  /* Petopia brand blue */
-  --primary: oklch(0.55 0.16 245);
-  --primary-foreground: oklch(0.99 0 0);
+  /* Petopia brand — matches logo.jpg background (#026FC3) */
+  --primary: #026FC3;
+  --primary-foreground: #ffffff;
   --secondary: oklch(0.967 0.01 247);
   --secondary-foreground: oklch(0.21 0.03 256);
   --muted: oklch(0.967 0.01 247);
@@ -36,8 +36,8 @@
 
   --sidebar: oklch(1 0 0);
   --sidebar-foreground: oklch(0.21 0.03 256);
-  --sidebar-primary: oklch(0.55 0.16 245);
-  --sidebar-primary-foreground: oklch(0.99 0 0);
+  --sidebar-primary: #026FC3;
+  --sidebar-primary-foreground: #ffffff;
   --sidebar-accent: oklch(0.967 0.01 247);
   --sidebar-accent-foreground: oklch(0.21 0.03 256);
   --sidebar-border: oklch(0.929 0.01 255);
