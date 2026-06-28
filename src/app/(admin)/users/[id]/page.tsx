@@ -7,6 +7,7 @@ import { PageHeader } from "@/components/PageHeader";
 import { StatusBadge } from "@/components/StatusBadge";
 import { DeleteButton } from "@/components/DeleteButton";
 import { deleteUserAndReturn } from "../actions";
+import { PawPointsAdjustForm } from "../PawPointsAdjustForm";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 
@@ -79,6 +80,43 @@ export default async function UserDetailPage({
         </Card>
 
         <div className="space-y-6">
+          <Card>
+            <CardHeader className="border-b py-4">
+              <CardTitle>Paw Points</CardTitle>
+            </CardHeader>
+            <CardContent className="p-4 space-y-4">
+              {user.pawPoints ? (
+                <>
+                  <div className="grid grid-cols-2 gap-3 text-sm">
+                    <div>
+                      <div className="text-muted-foreground text-xs">Balance</div>
+                      <div className="font-bold text-lg">{user.pawPoints.balance.toLocaleString()} pts</div>
+                      <div className="text-xs text-muted-foreground">AED {user.pawPoints.balanceAed.toFixed(2)}</div>
+                    </div>
+                    <div>
+                      <div className="text-muted-foreground text-xs">Tier</div>
+                      <div className="font-semibold">{user.pawPoints.tierLabel}</div>
+                      {user.pawPoints.earnBonusPct > 0 && (
+                        <div className="text-xs text-muted-foreground">+{user.pawPoints.earnBonusPct}% earn bonus</div>
+                      )}
+                    </div>
+                    <div>
+                      <div className="text-muted-foreground text-xs">Lifetime earned</div>
+                      <div className="font-medium">{user.pawPoints.lifetimeEarned.toLocaleString()}</div>
+                    </div>
+                    <div>
+                      <div className="text-muted-foreground text-xs">Lifetime redeemed</div>
+                      <div className="font-medium">{user.pawPoints.lifetimeRedeemed.toLocaleString()}</div>
+                    </div>
+                  </div>
+                  <PawPointsAdjustForm userId={user.id} currentBalance={user.pawPoints.balance} />
+                </>
+              ) : (
+                <PawPointsAdjustForm userId={user.id} currentBalance={0} />
+              )}
+            </CardContent>
+          </Card>
+
           <Card>
             <CardHeader className="border-b py-4"><CardTitle>Wishlist ({user.wishlist.length})</CardTitle></CardHeader>
             <CardContent className="p-4 space-y-3">

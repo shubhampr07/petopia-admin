@@ -76,6 +76,7 @@ export default async function UsersPage({
                 <TableHead>Orders</TableHead>
                 <TableHead>Wishlist</TableHead>
                 <TableHead>Bookings</TableHead>
+                <TableHead>Paw Points</TableHead>
                 <TableHead>Registered</TableHead>
                 <TableHead className="text-right">Actions</TableHead>
               </TableRow>
@@ -89,6 +90,9 @@ export default async function UsersPage({
                   <TableCell>{u.orderCount}</TableCell>
                   <TableCell>{u.wishlistCount}</TableCell>
                   <TableCell>{u.bookingCount}</TableCell>
+                  <TableCell className="text-sm font-medium">
+                    {(u.pawPointsBalance ?? 0).toLocaleString()}
+                  </TableCell>
                   <TableCell className="text-sm text-muted-foreground whitespace-nowrap">
                     {formatDate(u.createdAt)}
                   </TableCell>

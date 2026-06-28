@@ -174,6 +174,22 @@ export type UserListItem = {
   orderCount: number;
   wishlistCount: number;
   bookingCount: number;
+  pawPointsBalance?: number;
+  pawPointsTier?: string;
+};
+
+export type PawPointsSummary = {
+  balance: number;
+  balanceAed: number;
+  lifetimeEarned: number;
+  lifetimeRedeemed: number;
+  tier: string;
+  tierLabel: string;
+  earnBonusPct: number;
+  nextTier: string | null;
+  nextTierLabel: string | null;
+  pointsToNextTier: number;
+  tierProgressPct: number;
 };
 
 export type UserDetail = {
@@ -182,6 +198,7 @@ export type UserDetail = {
   email: string;
   phone: string | null;
   createdAt: string;
+  pawPoints?: PawPointsSummary;
   orders: { id: string; status: string; total: number; currency: string; createdAt: string }[];
   wishlist: { id: number; name: string; img: string; price: number }[];
   bookings: { id: string; serviceSlug: string; createdAt: string }[];
@@ -278,6 +295,11 @@ export const api = {
   listUsers: (search?: string) =>
     apiFetch<{ users: UserListItem[] }>(`/api/admin/users${search ? `?search=${encodeURIComponent(search)}` : ""}`),
   getUser: (id: string) => apiFetch<{ user: UserDetail }>(`/api/admin/users/${id}`),
+  adjustUserPawPoints: (id: string, delta: number, reason?: string) =>
+    apiFetch<{ ok: boolean; balance: number; wallet: PawPointsSummary }>(
+      `/api/admin/users/${id}/paw-points/adjust`,
+      { method: "POST", body: { delta, reason } },
+    ),
   deleteUser: (id: string) => apiFetch<{ ok: true }>(`/api/admin/users/${id}`, { method: "DELETE" }),
 
   // Orders
